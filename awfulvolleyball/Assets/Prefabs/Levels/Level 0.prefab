@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7c731be1805084385f271cd846e5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentRing: {fileID: 0}
+  parentRing: {fileID: 4250078474882327072}
 --- !u!64 &3519000680373984754
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c7c731be1805084385f271cd846e5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentRing: {fileID: 0}
+  parentRing: {fileID: 4250078474882327072}
 --- !u!64 &7814773019902819727
 MeshCollider:
   m_ObjectHideFlags: 0

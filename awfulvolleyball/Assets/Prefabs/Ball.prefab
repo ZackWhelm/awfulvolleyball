@@ -320,6 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4529645544484441689}
+  GravMultiply: 0.2
 --- !u!1001 &116015559258617431
 PrefabInstance:
   m_ObjectHideFlags: 0

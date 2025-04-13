@@ -85,8 +85,25 @@ public class Putter : NetworkBehaviour, ICanControlCamera
 
         if (collision.gameObject.TryGetComponent(out Ball ball))
         {
-            Debug.Log("Hit Ball");
+            HandleBallBounce(ball);
         }
+	}
+
+
+	private void HandleBallBounce(Ball ball) {
+		    float minForce = 0.25f;
+			float maxForce = 1.6f;
+			float incMag = ball.rb.velocity.magnitude;
+			float myMag = rb.velocity.magnitude;
+
+			float combinedMag = incMag + myMag;
+			float normalized = Mathf.Clamp01(combinedMag / 20f);
+			float bounceForce = Mathf.Lerp(minForce, maxForce, normalized);
+
+    		Vector3 direction = (ball.transform.position - transform.position).normalized;
+			ball.rb.velocity = Vector3.zero;
+			ball.rb.AddForce(direction * bounceForce, ForceMode.Impulse);
+			Debug.Log("Hit Ball");
 	}
 
 	public override void Spawned()

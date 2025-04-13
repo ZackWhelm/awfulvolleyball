@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.68
-  groundDrag: 0.8
-  jumpForce: 0.44
+  groundDrag: 1.1
+  jumpForce: 0.46
   dashForce: 15
   dashCooldownTimer: 2.5
   airMultiplier: 0.7
