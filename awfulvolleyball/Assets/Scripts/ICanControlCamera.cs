@@ -1,0 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public interface ICanControlCamera
+{
+	Vector3 Position { get; }
+	Quaternion Rotation { get; set; }
+	void ControlCamera(ref float pitch, ref float yaw);
+}
