@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class Putter : NetworkBehaviour, ICanControlCamera
+public class Adventurer : NetworkBehaviour, ICanControlCamera
 {
 	[Header("Traits")]
 	public float moveSpeed;

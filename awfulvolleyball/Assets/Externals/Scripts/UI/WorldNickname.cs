@@ -7,14 +7,14 @@ public class WorldNickname : MonoBehaviour
 	public TMP_Text worldNicknameText;
 	public Vector3 offset;
 
-	[HideInInspector] public Putter putter;
+	[HideInInspector] public Adventurer adventurer;
 	[HideInInspector] public Transform target;
 
-	public void SetTarget(Putter owner)
+	public void SetTarget(Adventurer owner)
 	{
-		putter = owner;
-		target = putter.interpolationTarget;
-		worldNicknameText.text = putter.PlayerObj.Nickname;
+		adventurer = owner;
+		target = adventurer.interpolationTarget;
+		worldNicknameText.text = adventurer.PlayerObj.Nickname;
 	}
 
 	private void LateUpdate()
