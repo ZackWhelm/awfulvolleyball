@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
-
-public class Adventurer : NetworkBehaviour, ICanControlCamera
+   public class Adventurer : NetworkBehaviour, ICanControlCamera
 {
 	[Header("Traits")]
 	public float moveSpeed;
