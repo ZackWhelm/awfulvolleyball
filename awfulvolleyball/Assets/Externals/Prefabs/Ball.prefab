@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 6950831755278381447}
   m_Layer: 6
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,7 +210,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1777857619219792223}
@@ -320,7 +320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4529645544484441689}
-  GravMultiply: 0.2
+  renderer: {fileID: 1611653322901924563}
+  GravMultiply: 0.25
 --- !u!1001 &116015559258617431
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -389,6 +390,11 @@ PrefabInstance:
 --- !u!4 &438699591068176828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 70f319e5e212b054c85b5176c6ecb053, type: 3}
+  m_PrefabInstance: {fileID: 116015559258617431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1611653322901924563 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 70f319e5e212b054c85b5176c6ecb053, type: 3}
   m_PrefabInstance: {fileID: 116015559258617431}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &150819713316822180

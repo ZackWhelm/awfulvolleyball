@@ -24,8 +24,10 @@ public class Stickman : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
+		Debug.Log("OnCollisionEnter");
         if (collision.gameObject.TryGetComponent(out Ball ball))
         {
+			Debug.Log("OnCollisionEnter Ball");
             HandleBallBounce(ball);
         }
 	}
@@ -61,4 +63,9 @@ public class Stickman : MonoBehaviour
 		MoveHandler.HandleInput(horDir, vertDir, jumpInput, crouchInput, sprintInput);
 	}
 
+	public void TeleportToAndFace(Vector3 pos, Vector3 _lookAt) {
+		headRigidbody.velocity = Vector3.zero;
+		headRigidbody.angularVelocity = Vector3.zero;
+		headRigidbody.gameObject.transform.position = pos;
+	}
 }

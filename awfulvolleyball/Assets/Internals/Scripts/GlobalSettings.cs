@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class GlobalSettings : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Traits")]
+    public bool IsMultiplayer = false;
+    public int PlayerCount = 1;
 
-    // Update is called once per frame
-    void Update()
+    public static GlobalSettings Instance { get; private set; }
+
+    void Awake()
     {
-        
+        Instance = this;   
     }
 }

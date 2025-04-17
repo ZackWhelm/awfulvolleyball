@@ -10,16 +10,8 @@ public class StickmanBallCollider : MonoBehaviour
 	public Rigidbody mainRB;
 	public Transform headTransform;
 
-	void OnCollisionEnter(Collision collision)
-	{
-		Debug.Log("Collided with: " + collision.gameObject.name);
-        if (collision.gameObject.TryGetComponent(out Ball ball))
-        {
-			Debug.Log("In Here");
-			HandleBallBounce(ball);
-		}
-	}
-	private void HandleBallBounce(Ball ball) {
+
+	public void HandleBallBounce(Ball ball) {
 		float minForce = 0.25f;
 		float maxForce = 1.6f;
 		
