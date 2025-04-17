@@ -22,6 +22,13 @@ public class Ball : NetworkBehaviour
         }
 	}
 
+    void FixedUpdate() {
+        if (GameManager.Instance != null) {
+            return;
+        }
+        rb.AddForce(Physics.gravity * GravMultiply, ForceMode.Acceleration);
+    }
+
     public void HandleThroughRing(Ring ring) {
         Debug.Log("Ball Go Through: " + ring.name);
     }

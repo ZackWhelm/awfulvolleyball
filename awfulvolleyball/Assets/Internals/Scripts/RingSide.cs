@@ -20,8 +20,10 @@ public class RingSide : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!GameManager.Instance.Runner.IsServer) return;
-
+        if (GameManager.Instance != null) {
+            if (!GameManager.Instance.Runner.IsServer) return;
+        }
+        
         if (other.TryGetComponent(out Ball ball))
         {
             if (!parentRing.CheckIsExit(this, ball)) {
