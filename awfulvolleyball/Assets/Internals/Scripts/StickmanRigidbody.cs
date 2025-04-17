@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class StickmanHead : MonoBehaviour 
+public class StickmanRigidbody : MonoBehaviour 
 {
     [Header("Dependencies")]
     public Stickman stickman;

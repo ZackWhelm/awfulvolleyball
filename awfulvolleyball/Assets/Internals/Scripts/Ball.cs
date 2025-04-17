@@ -46,7 +46,6 @@ public class Ball : NetworkBehaviour
 
         if (collision.gameObject.TryGetComponent(out StickmanBallCollider stickBallColider))
         {
-            Debug.Log("StickManCollision");
 			stickBallColider.HandleBallBounce(this);
 		}
     }

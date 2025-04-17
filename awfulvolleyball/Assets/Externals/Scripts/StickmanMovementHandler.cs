@@ -32,6 +32,7 @@ public class StickmanMovementHandler : MonoBehaviour
 	public Rigidbody rb;
 	public Camera cam;
 	public StickmanAnimationHandler AnimHandler;
+	public Transform AnimTransform;
 
 	bool isFirstUpdate = true;
 
@@ -75,6 +76,7 @@ public class StickmanMovementHandler : MonoBehaviour
 		SpeedControl();
 		IsSprinting = sprintInput;
 		AnimHandler.UpdateAnimationDirection(moveDir);
+		AnimHandler.UpdateAnimPosition(rb.transform.position);
 	}
 
 	private void MovePlayer(Vector3 moveDirection, bool tryingToJump)
@@ -114,6 +116,9 @@ public class StickmanMovementHandler : MonoBehaviour
 		else {
 			playerSpeed = JogSpeed;
 		}
+		if (AnimTransform == null) {
+			return;
+		}
     }
 
 
@@ -128,7 +133,6 @@ public class StickmanMovementHandler : MonoBehaviour
 		if (_rayDidHit) {
 			Vector3 vel = rb.velocity;
 			Vector3 otherVel = Vector3.zero;
-
 			float rayDirVel = Vector3.Dot(rayDir, vel);
 			// TODO(zack): implement
 			float otherDirVel = Vector3.Dot(rayDir, otherVel);

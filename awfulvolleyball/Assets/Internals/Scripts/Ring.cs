@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Ring : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Ring : MonoBehaviour
     [Header("Dependencies")]
 	public RingSide sideOne = null;
 	public RingSide sideTwo = null;
+	public UnityEvent onRingPassedThrough = null;
 
     void Start()
     {
@@ -52,7 +54,7 @@ public class Ring : MonoBehaviour
 	}
 
 	private void HandleBall(Ball ball) {
-		ball.HandleThroughRing(this);
+		onRingPassedThrough.Invoke();
 		/*
 		player.PlayerObj.TimeTaken = (GameManager.Instance.Runner.Tick - GameManager.Instance.TickStarted) * GameManager.Instance.Runner.DeltaTime;
 		GameManager.Instance.Runner.Despawn(player.Object);

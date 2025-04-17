@@ -12,10 +12,9 @@ public class CheckpointTrigger : MonoBehaviour
         }
         Debug.Log("In Here");
 
-        if (other.TryGetComponent(out StickmanHead stickmanHead))
+        if (other.TryGetComponent(out StickmanRigidbody rb))
         {
-            Debug.Log("TryGetComponent");
-            checkpoint.HandleEnter(stickmanHead.stickman);
+            checkpoint.HandleEnter(rb.stickman);
         }
     }
 
@@ -25,10 +24,9 @@ public class CheckpointTrigger : MonoBehaviour
             if (!GameManager.Instance.Runner.IsServer) return;
         }
         
-        if (other.TryGetComponent(out StickmanHead stickmanHead))
+        if (other.TryGetComponent(out StickmanRigidbody rb))
         {
-            Debug.Log("TryGetComponent");
-            checkpoint.HandleExit(stickmanHead.stickman);
+            checkpoint.HandleExit(rb.stickman);
         }
     }
 }

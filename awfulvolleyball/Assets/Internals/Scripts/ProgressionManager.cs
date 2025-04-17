@@ -28,7 +28,7 @@ public class ProgressionManager : MonoBehaviour
 
     public bool CheckIfBallExists()
     {
-        return GameObject.FindWithTag("Balls") != null;
+        return GameObject.FindWithTag("Ball") != null;
     }
 
     public void SpawnBallAboveThis(Vector3 pos) {
@@ -42,13 +42,8 @@ public class ProgressionManager : MonoBehaviour
 
     public void ResetPlayers() {
         if (!GlobalSettings.Instance.IsMultiplayer) {
-            Vector3 targPos = new Vector3( LastCheckpoint.transform.position.x, LastCheckpoint.transform.position.y + stickmanSingularRef.MoveHandler.baseHeight, LastCheckpoint.transform.position.z - CheckpointRadius);
-            stickmanSingularRef.TeleportToAndFace(targPos, LastCheckpoint.transform.position);
+           // Vector3 targPos = new Vector3(LastCheckpoint.transform.position.x, LastCheckpoint.transform.position.y + stickmanSingularRef.MoveHandler.baseHeight, LastCheckpoint.transform.position.z - CheckpointRadius);
+           // stickmanSingularRef.TeleportToAndFace(targPos, LastCheckpoint.transform.position);
         }
-    }
-
-
-    public void PassedRingOne() {
-        doorPanel.Open;   
     }
 }

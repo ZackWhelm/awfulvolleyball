@@ -26,4 +26,14 @@ public class StickmanBallCollider : MonoBehaviour
 		ball.rb.velocity = Vector3.zero;
 		ball.rb.AddForce(direction * bounceForce, ForceMode.Impulse);
 	}
+
+	void LateUpdate()
+	{
+		if (Camera.main != null)
+		{
+			Vector3 camForward = Camera.main.transform.forward;
+			camForward.y = 0; // Ignore vertical tilt
+			transform.forward = camForward.normalized;
+		}
+	}
 }
