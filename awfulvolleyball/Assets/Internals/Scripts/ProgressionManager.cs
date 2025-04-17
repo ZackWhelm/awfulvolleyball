@@ -49,6 +49,6 @@ public class ProgressionManager : MonoBehaviour
 
 
     public void PassedRingOne() {
-        doorPanel.Open;
+        doorPanel.Open;   
     }
 }
