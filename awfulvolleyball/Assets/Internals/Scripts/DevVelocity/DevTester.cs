@@ -10,12 +10,6 @@ public class DevTester : MonoBehaviour
 
     [Header("Traits")]
     public float pushForce = 10f;
-    /*
-    // how to find ball: GameObject.FindWithTag("Ball")
-Press E to move ball forward from direction of player. 
-Press Q to spawn ball on top of player. 
-    */
-
 
     void Update() {
         if (!GlobalSettings.Instance.IsMultiplayer) {
