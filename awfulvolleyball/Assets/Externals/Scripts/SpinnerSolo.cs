@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
-public class Spinner : NetworkBehaviour
+public class SpinnerSolo : MonoBehaviour
 {
 	public Rigidbody rb;
 	public AnimationCurve curve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -12,18 +12,9 @@ public class Spinner : NetworkBehaviour
 	[Range(0,1)] public float phaseOffset = 0;
 
 
-	public override void FixedUpdateNetwork()
-	{
-		rb.MoveRotation(Quaternion.AngleAxis(
-			curve.Evaluate(GameManager.Time * speedFactor + phaseOffset / curve.keys[curve.keys.Length - 1].time) * 360,
-			transform.TransformDirection(axis)));
-	}
-
-    void FixedUpdate()
+    void Update()
     {
-		rb.MoveRotation(Quaternion.AngleAxis(
-			curve.Evaluate(GameManager.Time * speedFactor + phaseOffset / curve.keys[curve.keys.Length - 1].time) * 360,
-			transform.TransformDirection(axis)));
+		rb.MoveRotation(transform.rotation * Quaternion.AngleAxis(speedFactor * Time.fixedDeltaTime, transform.TransformDirection(axis)));
     }
 
     private void OnValidate()

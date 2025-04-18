@@ -58,7 +58,6 @@ public class Ball : NetworkBehaviour
         }
 
         yield return new WaitForSeconds(1f);
-        ProgressionManager.Instance.ResetPlayers();
         Destroy(this.gameObject);
     }
 

@@ -40,10 +40,18 @@ public class ProgressionManager : MonoBehaviour
         }
     }
 
-    public void ResetPlayers() {
-        if (!GlobalSettings.Instance.IsMultiplayer) {
-            Vector3 targPos = new Vector3(LastCheckpoint.transform.position.x, LastCheckpoint.transform.position.y + stickmanSingularRef.MoveHandler.baseHeight, LastCheckpoint.transform.position.z - CheckpointRadius);
-            stickmanSingularRef.TeleportToAndFace(targPos, LastCheckpoint.transform.position);
-        }
-    }
+public void ResetPlayer(Stickman stickman)
+{
+    float angle = Random.Range(0f, Mathf.PI * 2);
+
+    float xOffset = Mathf.Cos(angle) * CheckpointRadius;
+    float zOffset = Mathf.Sin(angle) * CheckpointRadius;
+
+    Vector3 centerPos = LastCheckpoint.transform.position;
+    float yPos = centerPos.y + stickmanSingularRef.MoveHandler.baseHeight;
+
+    Vector3 targPos = new Vector3(centerPos.x + xOffset, yPos, centerPos.z + zOffset);
+
+    stickmanSingularRef.TeleportToAndFace(targPos, centerPos);
+}
 }

@@ -68,4 +68,14 @@ public class Stickman : MonoBehaviour
 		headRigidbody.angularVelocity = Vector3.zero;
 		headRigidbody.gameObject.transform.position = pos;
 	}
+	
+	public void HandleCritalHit() {
+		// TODO(zack: add anim)
+		OnDeath();
+	}
+
+
+	void OnDeath() {
+		ProgressionManager.Instance.ResetPlayer(this);
+	}
 }
