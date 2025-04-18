@@ -1265,15 +1265,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4416136085220780204, guid: 1d46bc115a7a46e4083407385e851257, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4416136085220780204, guid: 1d46bc115a7a46e4083407385e851257, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4416136085220780204, guid: 1d46bc115a7a46e4083407385e851257, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 4416136085220780204, guid: 1d46bc115a7a46e4083407385e851257, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2528,8 +2528,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422620813}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.056865312, y: 0.000000003719263, z: -2.1183982e-10, w: 0.9983819}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.16997372, y: 0, z: 0, w: 0.9854486}
+  m_LocalPosition: {x: 0, y: 0.9197509, z: 0.26308155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7668,8 +7668,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333036637}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.015568366, y: 0.000000029856857, z: -4.6487877e-10, w: 0.9998788}
-  m_LocalPosition: {x: 0, y: 0.000000059604645, z: 0}
+  m_LocalRotation: {x: 0.015568341, y: -0.0000000035111354, z: 5.4669744e-11, w: 0.9998788}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9267,7 +9267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minForce: 0.25
-  maxForce: 1.6
+  maxForce: 1.9
   mainRB: {fileID: 230333897}
   headTransform: {fileID: 1736457284}
 --- !u!1001 &1767841394
@@ -9479,6 +9479,7 @@ GameObject:
   - component: {fileID: 1800119442}
   - component: {fileID: 1800119443}
   - component: {fileID: 1800119444}
+  - component: {fileID: 1800119445}
   m_Layer: 0
   m_Name: GAME_MANAGER
   m_TagString: Untagged
@@ -9533,6 +9534,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialDoorPanel: {fileID: 3236652468053073989}
   ringsPassedThrough: 0000
+--- !u!114 &1800119445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800119441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f223aacf157af314eb69c66c00c32d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 4529645544484441693, guid: 0cb0ee0756ee2754c9482dfe24299845, type: 3}
+  playerTransform: {fileID: 3578628269377600156}
+  pushForce: 10
 --- !u!1001 &1801060311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10551,8 +10567,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040731888}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06674039, y: -1.1603523e-10, z: 7.761092e-12, w: 0.9977704}
-  m_LocalPosition: {x: 0, y: 0.000000059604645, z: 0}
+  m_LocalRotation: {x: 0.06674039, y: -3.4244248e-15, z: 1.8348907e-16, w: 0.9977704}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11623,8 +11639,8 @@ Transform:
   m_GameObject: {fileID: 3174216907912412104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.494, y: 0.026999474, z: 0.329}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.22, y: 0.026999474, z: 0.329}
+  m_LocalScale: {x: 0.6, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -11746,7 +11762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b715cbf3f3b89204a9c02c0bfceafa86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endPos: {x: 0, y: 0, z: 0}
+  endPos: {x: 1.15, y: 0.0269, z: 0.329}
   duration: 2
 --- !u!4 &3274392985487297446
 Transform:

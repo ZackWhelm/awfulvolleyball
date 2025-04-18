@@ -21,6 +21,6 @@ public class DoorPanel : MonoBehaviour
             yield return null;
         }
 
-        transform.position = endPos; // snap to final position
+        transform.position = endPos;
     }
 }

@@ -12,9 +12,6 @@ public class StickmanBallCollider : MonoBehaviour
 
 
 	public void HandleBallBounce(Ball ball) {
-		float minForce = 0.25f;
-		float maxForce = 1.6f;
-		
 		float incMag = ball.rb.velocity.magnitude;
 		float myMag = mainRB.velocity.magnitude;
 
