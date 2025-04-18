@@ -19,11 +19,8 @@ public class StickmanAnimationHandler : MonoBehaviour
 
 	public void UpdateAnimationDirection(Vector3 movementDirection) {
 		if (movementDirection != Vector3.zero) {
-			Debug.Log("In Here");
 			Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
 			Vector3 targetEuler = new Vector3(0, targetRotation.eulerAngles.y, 0);
-			Debug.Log("targetEuler: " + targetEuler);
-
 			Quaternion smoothRotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetEuler), Time.deltaTime * rotationSpeed);
 			transform.rotation = smoothRotation;
 			animator.SetBool("IsIdle", false);

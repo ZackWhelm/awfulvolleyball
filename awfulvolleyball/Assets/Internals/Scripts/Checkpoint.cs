@@ -4,6 +4,7 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [Header("Float")]
+    [SerializeField] private bool unlocked = false;
     [SerializeField] private float _playersIn; 
     private Dictionary<Stickman, bool> stickmenIn = new Dictionary<Stickman, bool>();
 
@@ -16,6 +17,9 @@ public class Checkpoint : MonoBehaviour
     }
 
     public void HandleEnter(Stickman stick) {
+        if (!unlocked) {
+            Unlock();
+        }
         if (!stickmenIn.ContainsKey(stick)) {
             stickmenIn[stick] = true;
             PlayersIn = stickmenIn.Count;
@@ -33,5 +37,10 @@ public class Checkpoint : MonoBehaviour
             stickmenIn.Remove(stick);
             PlayersIn = stickmenIn.Count;
         }
+    }
+
+    public void Unlock() {
+        unlocked = true;
+        ProgressionManager.Instance.SetLastCheckPoint(this);
     }
 }
