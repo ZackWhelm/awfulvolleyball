@@ -112,10 +112,8 @@ public class GameState : NetworkBehaviour
 				PlayerRegistry.ForEach(p =>
 				{
 					p.Controller.JumpTimer = TickTimer.CreateFromSeconds(Runner, 0.1f);
-					p.Controller.DashTimer = TickTimer.CreateFromSeconds(Runner, 0.1f);
 				});
 			}
-			CameraController.Recenter();
 			HUD.SetLevelName(GameManager.Instance.CurrentHole);
 			HUD.SetStrokeCount(0);
 			HUD.SetTimerText(0);

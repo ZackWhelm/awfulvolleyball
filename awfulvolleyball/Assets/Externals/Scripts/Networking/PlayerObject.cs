@@ -18,7 +18,7 @@ public class PlayerObject : NetworkBehaviour
 	[Networked]
 	public byte Index { get; set; }
 	[Networked]
-	public Adventurer Controller { get; set; }
+	public Stick Controller { get; set; }
 
 	// User Settings
 	[Networked, OnChangedRender(nameof(StatChanged))]

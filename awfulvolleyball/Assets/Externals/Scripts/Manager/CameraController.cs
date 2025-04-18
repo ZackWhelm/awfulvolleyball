@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using Helpers.Math;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
-{
-	[field: SerializeField] public ShakeBehaviour Shake { get; private set; }
-	
+{	
 	ICanControlCamera con = null;
 	public static ICanControlCamera Controller => Instance.con;
 
-	public float lookHeightOffset = 0.2f;
-
-	public float defaultPitch = 20;
-	public float maxPitch = 90;
+	public CinemachineVirtualCamera virtualCamera;
 
 	[SerializeField, ReadOnly] float pitch = 0;
 	[SerializeField, ReadOnly] float yaw = 0;
@@ -44,6 +40,7 @@ public class CameraController : MonoBehaviour
 	public static void AssignControl(ICanControlCamera controller)
 	{
 		Instance.con = controller;
+		
 		if (controller == null)
 		{
 			HUD.Instance.SpectatingObj.SetActive(false);
@@ -81,28 +78,5 @@ public class CameraController : MonoBehaviour
 				}
 			}
 		}
-
-		con.ControlCamera(ref pitch, ref yaw);
-		yaw = Mathf.Repeat(yaw + 180, 360) - 180;
-		pitch = Mathf.Clamp(pitch, -maxPitch, maxPitch);
-
-		Quaternion orientation = Quaternion.Euler(pitch, yaw, 0);
-
-		// Set the camera at the player's position with a height offset
-		transform.position = con.Position;
-
-		// Set the camera's rotation directly
-		transform.rotation = orientation;
-		con.Rotation = orientation;
-
-		// Change to orientation 
-
-		cachedPosition = con.Position;
-	}
-
-	public static void Recenter()
-	{
-		Instance.pitch = Instance.defaultPitch;
-		Instance.yaw = 0;
 	}
 }

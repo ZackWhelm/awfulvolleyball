@@ -14,14 +14,6 @@ public class Stickman : MonoBehaviour
 	public bool crouchInput = false;
 	public bool sprintInput = false;
 
-    bool readyToJump;
-
-
-	[Header("Internals")]
-	[SerializeField] private Vector3 prevVelocity = Vector3.zero;
-
-	bool isFirstUpdate = true;
-
 	private void OnCollisionEnter(Collision collision)
 	{
 		Debug.Log("OnCollisionEnter");
@@ -76,6 +68,6 @@ public class Stickman : MonoBehaviour
 
 
 	void OnDeath() {
-		ProgressionManager.Instance.ResetPlayer(this);
+		// ProgressionManager.Instance.ResetPlayer(this);
 	}
 }

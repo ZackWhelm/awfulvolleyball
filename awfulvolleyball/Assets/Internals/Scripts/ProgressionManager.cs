@@ -40,7 +40,7 @@ public class ProgressionManager : MonoBehaviour
         }
     }
 
-public void ResetPlayer(Stickman stickman)
+public void ResetPlayer(Stick stick)
 {
     float angle = Random.Range(0f, Mathf.PI * 2);
 

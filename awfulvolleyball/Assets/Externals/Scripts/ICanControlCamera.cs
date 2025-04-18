@@ -4,7 +4,5 @@ using UnityEngine;
 
 public interface ICanControlCamera
 {
-	Vector3 Position { get; }
-	Quaternion Rotation { get; set; }
-	void ControlCamera(ref float pitch, ref float yaw);
+	void SetTarget(ref Transform target);
 }
