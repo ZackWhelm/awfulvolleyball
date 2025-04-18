@@ -163,11 +163,13 @@ public class StickMoveHandler : MonoBehaviour
 
 	bool IsGrounded()
 	{
+		Debug.Log("checking grounded:");
 		RaycastHit hit;
 		Vector3 rayOrigin = rb.transform.position;
 		Vector3 rayDir = Vector3.down;
 		float rayDistance = RideHeight + GroundedBuffer;
 		bool rayDidHit = Physics.Raycast(rayOrigin, rayDir, out hit, rayDistance, hoverableLayers);
+		Debug.Log("is grounded:" + rayDidHit);
 
 		if (IsJumping) {
 			if ( rb.velocity.y < 0.0f ) {

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
-   public class Adventurer : NetworkBehaviour, ICanControlCamera
+using Cinemachine;
+public class Adventurer : NetworkBehaviour, ICanControlCamera
 {
 	[Header("Traits")]
 	public float moveSpeed;
@@ -152,11 +153,11 @@ using Fusion;
 		rb.MovePosition(Level.Current.GetSpawnPosition(PlayerObj.Index));
 	}
 
-	public void SetTarget(ref Transform target)
+	public void SetLook(ref CinemachineFreeLook look)
 	{
 		if (Object.HasInputAuthority)
 		{
-			target = transform;
+			
 		}
 	}
 }

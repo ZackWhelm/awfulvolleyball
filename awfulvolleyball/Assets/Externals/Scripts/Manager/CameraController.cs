@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 	ICanControlCamera con = null;
 	public static ICanControlCamera Controller => Instance.con;
 
-	public CinemachineVirtualCamera virtualCamera;
+	public CinemachineFreeLook virtualCamera;
 
 	[SerializeField, ReadOnly] float pitch = 0;
 	[SerializeField, ReadOnly] float yaw = 0;
@@ -24,12 +24,6 @@ public class CameraController : MonoBehaviour
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
-	private void OnValidate()
-	{
-		pitch = defaultPitch;
-		transform.localEulerAngles = new Vector3(pitch, yaw, 0);
-	}
-
 	private void OnDestroy()
 	{
 		con = null;
@@ -40,7 +34,7 @@ public class CameraController : MonoBehaviour
 	public static void AssignControl(ICanControlCamera controller)
 	{
 		Instance.con = controller;
-		
+		Instance.con.SetLook(ref Instance.virtualCamera);
 		if (controller == null)
 		{
 			HUD.Instance.SpectatingObj.SetActive(false);
@@ -67,6 +61,7 @@ public class CameraController : MonoBehaviour
 
 		if (con == null) return;
 
+		// Spectater?
 		if (con is NetworkBehaviour nb)
 		{
 			if (nb.Object.HasInputAuthority == false)

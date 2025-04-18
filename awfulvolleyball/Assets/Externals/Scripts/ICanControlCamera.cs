@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Cinemachine;
 
 public interface ICanControlCamera
 {
-	void SetTarget(ref Transform target);
+	public void SetLook(ref CinemachineFreeLook look);
 }

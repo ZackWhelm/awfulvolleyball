@@ -2586,7 +2586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9214e429963afa2458d2a6c3942aa9a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useEffect: 1
 --- !u!1001 &627613025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4298,7 +4297,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 23
+    m_Bits: 4294967295
   m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5139,10 +5138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7461ab556a336b34e886fbd4b1236704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Shake>k__BackingField: {fileID: 0}
-  lookHeightOffset: 0.2
-  defaultPitch: 20
-  maxPitch: 90
+  virtualCamera: {fileID: 720565820}
   pitch: 20
   yaw: 0
 --- !u!4 &1068639773

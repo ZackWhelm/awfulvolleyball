@@ -54,17 +54,6 @@ public class OptionScreen : MonoBehaviour
 		}
 	}
 
-	public void ToggleCameraShake()
-    {
-		if (CameraController.Instance)
-		{
-			if (CameraController.Instance.Shake != null)
-			{
-				CameraController.Instance.Shake.enabled = cameraShakeToggle.isOn;
-			}
-		}
-	}
-
 
 	public void SetVolumeMaster(float value)
 	{

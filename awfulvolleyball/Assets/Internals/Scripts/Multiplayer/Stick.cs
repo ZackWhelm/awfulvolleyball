@@ -1,5 +1,6 @@
 using UnityEngine;
 using Fusion;
+using Cinemachine;
 
 public class Stick: NetworkBehaviour, ICanControlCamera
 {
@@ -52,16 +53,20 @@ public class Stick: NetworkBehaviour, ICanControlCamera
 		{
 			CurrInput = input;
 		}
-		
-		MoveHandler.HandleInput(CurrInput.horDir, CurrInput.vertDir, CurrInput.jumpInput, CurrInput.crouchInput, CurrInput.sprintInput);
+		if (Runner.IsForward)
+		{
+			MoveHandler.HandleInput(CurrInput.horDir, CurrInput.vertDir, CurrInput.jumpInput, CurrInput.crouchInput, CurrInput.sprintInput);
+		}
 	}
 
 
-	public void SetTarget(ref Transform target)
+	public void SetLook(ref CinemachineFreeLook look)
 	{
 		if (Object.HasInputAuthority)
 		{
-			target = transform;
+			look.LookAt = bodyRigidBody.transform;
+			look.Follow = bodyRigidBody.transform;
+			MoveHandler.cam = Camera.main;
 		}
 	}
 
