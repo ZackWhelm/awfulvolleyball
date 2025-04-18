@@ -21,7 +21,7 @@ public class StickmanBallCollider : MonoBehaviour
 
 		Vector3 direction = (ball.transform.position - headTransform.position).normalized;
 		ball.rb.velocity = Vector3.zero;
-		direction += new Vector3(0.0f, 0.2f, 0.0f);
+		direction += new Vector3(0.0f, 0.1f, 0.0f);
 		ball.rb.AddForce(direction * bounceForce, ForceMode.Impulse);
 	}
 

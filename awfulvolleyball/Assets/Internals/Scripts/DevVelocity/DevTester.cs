@@ -30,7 +30,12 @@ Press Q to spawn ball on top of player.
             if (ball != null) {
                 Rigidbody rb = ball.GetComponent<Rigidbody>();
                 if (rb != null) {
-                    rb.velocity = transform.forward * pushForce;
+                    Vector3 directionTrue = (ball.transform.position - playerTransform.position);
+                    directionTrue = new Vector3(directionTrue.x, 0.0f, directionTrue.z);
+                    Vector3 direction = directionTrue.normalized;
+                    direction += new Vector3(0.0f, 0.1f, 0.0f);
+                    direction.Normalize();
+                    rb.velocity = direction * pushForce;
                 }
             }
         }
