@@ -68,11 +68,7 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 			CurrInput = input;
 		}
 		if (Runner.IsForward) {
-			if (Object.HasInputAuthority)
-			{
-				Debug.Log("Handling Input For: " + gameObject.name + PlayerObj.Index);
-				HandleInput(CurrInput);
-			}
+			HandleInput(CurrInput);
 		}
 	}
 
@@ -85,9 +81,9 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 
 	private void MovePlayer(Vector3 moveDirection)
     {
-		Debug.Log("Trying to move player in dir:");
-		Debug.Log(moveDirection);
 		rb.AddForce(moveDirection.normalized * 2f, ForceMode.Force);
+		TryHoverPlayer();
+		LimitSpeed();
 	}
 
 	public void SetLook(ref CinemachineFreeLook look)
