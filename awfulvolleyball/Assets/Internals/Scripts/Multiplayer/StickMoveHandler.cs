@@ -65,18 +65,20 @@ public class StickMoveHandler : MonoBehaviour
 
 
 	public void HandleInput(float horizontal, float vertical, bool spaceInput, bool crouchInput, bool sprintInput) {
+		/*
 		Vector3 camForward = cam.transform.forward;
 		Vector3 camRight = cam.transform.right;
 
 		Vector3 flatForward = new Vector3(camForward.x, 0f, camForward.z).normalized;
 		Vector3 flatRight = new Vector3(camRight.x, 0f, camRight.z).normalized;
 
-		Vector3 moveDir = flatForward * vertical + flatRight * horizontal;
+		Vector3 moveDir = rb.transform.forward * vertical + rb.transform.right * horizontal;
 		MovePlayer(moveDir, spaceInput);
 		SpeedControl();
 		IsSprinting = sprintInput;
 		AnimHandler.UpdateAnimationDirection(moveDir);
 		AnimHandler.UpdateAnimPosition(rb.transform.position);
+		*/
 	}
 
 	private void MovePlayer(Vector3 moveDirection, bool tryingToJump)
@@ -137,14 +139,9 @@ public class StickMoveHandler : MonoBehaviour
 			Vector3 vel = rb.velocity;
 			Vector3 otherVel = Vector3.zero;
 			float rayDirVel = Vector3.Dot(rayDir, vel);
-			// TODO(zack): implement
 			float otherDirVel = Vector3.Dot(rayDir, otherVel);
-
-
 			float relVel = rayDirVel - otherDirVel;
-
 			float x = hit.distance - RideHeight;
-
 			float springForce = (x* RideSpringStrength) - (relVel * RideSpringDamper);
 			rb.AddForce(rayDir * springForce);
 

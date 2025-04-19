@@ -32,7 +32,8 @@ public class PlayerInputBehaviour : Fusion.Behaviour, INetworkRunnerCallbacks
 			&& GameManager.State.Current != GameState.EGameState.Game) return;
 
 		PlayerInput fwInput = new PlayerInput();
-
+		fwInput.rightDir = new Vector2(Camera.main.transform.right.x, Camera.main.transform.right.z);
+		fwInput.forwardDir = new Vector2(Camera.main.transform.forward.x, Camera.main.transform.forward.z);
 		fwInput.horDir = xInput;
 		fwInput.vertDir = yInput;
 		fwInput.jumpInput = spaceInput;
@@ -78,4 +79,8 @@ public struct PlayerInput : INetworkInput
 	public bool crouchInput;
 	public float horDir;
 	public float vertDir;
+
+	public Vector2 rightDir;
+	public Vector2 forwardDir;
+
 }

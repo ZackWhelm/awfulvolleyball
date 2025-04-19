@@ -34,7 +34,9 @@ public class CameraController : MonoBehaviour
 	public static void AssignControl(ICanControlCamera controller)
 	{
 		Instance.con = controller;
-		Instance.con.SetLook(ref Instance.virtualCamera);
+		if (Instance.con != null) {
+			Instance.con.SetLook(ref Instance.virtualCamera);
+		}
 		if (controller == null)
 		{
 			HUD.Instance.SpectatingObj.SetActive(false);

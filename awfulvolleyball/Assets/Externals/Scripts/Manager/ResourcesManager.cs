@@ -6,7 +6,7 @@ public class ResourcesManager : MonoBehaviour
 {
     public static ResourcesManager Instance { get; private set; }
 
-	public Stick playerControllerPrefab;
+	public PlayerAvatar playerControllerPrefab;
 	public Ball ballPrefab;
 
 	public PlayerScoreboardUI playerScoreUI;

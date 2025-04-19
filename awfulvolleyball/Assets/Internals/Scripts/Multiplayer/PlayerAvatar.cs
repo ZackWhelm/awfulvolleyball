@@ -1,0 +1,150 @@
+using UnityEngine;
+using Fusion;
+using Cinemachine;
+
+public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
+{
+	public PlayerObject PlayerObj { get; private set; }
+	public AvatarMoveTraits MoveTraits;
+	public Rigidbody rb;
+
+	[Networked]
+	public TickTimer JumpTimer { get; set; }
+	public bool CanJump => JumpTimer.ExpiredOrNotRunning(Runner);
+
+	[Networked]
+	PlayerInput CurrInput { get; set; }
+	public bool IsJumping = false;
+
+	public bool IsCrouching = false;
+	public bool IsSprinting = false;
+
+
+	[Header("Hover Variables")]
+	public LayerMask hoverableLayers;
+	public float RideHeight = 1.2f;
+	public float RideSpringDamper = 1.0f;
+	public float RideSpringStrength = 1.0f;
+    public float GroundedBuffer = 0.1f;
+	public float PlayerSpeed = 1.2f;
+
+
+	void Update()
+	{
+		if (Object.HasInputAuthority)
+		{
+			InputAuthorityUpdate(CurrInput);
+		}
+	}
+
+	public override void Spawned()
+	{
+		PlayerObj = PlayerRegistry.GetPlayer(Object.InputAuthority);
+		PlayerObj.Controller = this;
+		
+		if (Object.HasInputAuthority)
+		{
+			Debug.Log("HasInputAuthority" + gameObject.name  + PlayerObj.Index);
+			CameraController.AssignControl(this);
+		}
+		else
+		{
+			Debug.Log("Does not have InputAuthority" + gameObject.name + PlayerObj.Index);
+			Instantiate(ResourcesManager.Instance.worldNicknamePrefab, InterfaceManager.Instance.worldCanvas.transform).SetTarget(this);
+		}
+	}
+
+	public override void Despawned(NetworkRunner runner, bool hasState)
+	{
+		if (CameraController.HasControl(this))
+		{
+			CameraController.AssignControl(null);
+		}
+	}
+
+	public override void FixedUpdateNetwork() {
+		if (GetInput(out PlayerInput input))
+		{
+			CurrInput = input;
+		}
+		if (Runner.IsForward) {
+			if (Object.HasInputAuthority)
+			{
+				Debug.Log("Handling Input For: " + gameObject.name + PlayerObj.Index);
+				HandleInput(CurrInput);
+			}
+		}
+	}
+
+	public void HandleInput(PlayerInput input) {
+		Vector3 newForward = new Vector3(input.forwardDir.x, 0.0f, input.forwardDir.y);
+		Vector3 newRight = new Vector3(input.rightDir.x, 0.0f, input.rightDir.y);
+		Vector3 moveDir = newForward * input.vertDir + newRight * input.horDir;
+		MovePlayer(moveDir);
+	}
+
+	private void MovePlayer(Vector3 moveDirection)
+    {
+		Debug.Log("Trying to move player in dir:");
+		Debug.Log(moveDirection);
+		rb.AddForce(moveDirection.normalized * 2f, ForceMode.Force);
+	}
+
+	public void SetLook(ref CinemachineFreeLook look)
+	{
+		if (Object.HasInputAuthority)
+		{
+			look.LookAt = rb.transform;
+			look.Follow = rb.transform;
+		}
+	}
+
+	private void TryHoverPlayer() {
+		RaycastHit hit;
+		Vector3 rayOrigin = rb.transform.position;
+		Vector3 rayDir = Vector3.down;
+		float rayDistance = RideHeight + (GroundedBuffer*2);
+
+		bool _rayDidHit = Physics.Raycast(rayOrigin, rayDir, out hit, rayDistance, hoverableLayers);
+				
+		if (_rayDidHit) {
+			Vector3 vel = rb.velocity;
+			Vector3 otherVel = Vector3.zero;
+			float rayDirVel = Vector3.Dot(rayDir, vel);
+			float otherDirVel = Vector3.Dot(rayDir, otherVel);
+			float relVel = rayDirVel - otherDirVel;
+			float x = hit.distance - RideHeight;
+			float springForce = (x* RideSpringStrength) - (relVel * RideSpringDamper);
+			rb.AddForce(rayDir * springForce);
+
+		}
+	}
+
+	private void LimitSpeed() {
+		Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        if(flatVel.magnitude > PlayerSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * PlayerSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+	}
+
+    private void InputAuthorityUpdate(PlayerInput input)
+	{
+		RideHeight = MoveTraits.BaseHeight;
+		IsCrouching = input.crouchInput;
+		IsSprinting = input.sprintInput;
+
+		if (IsCrouching) {
+			RideHeight = MoveTraits.CrouchHeight;
+		}
+		if (IsSprinting) {
+			IsCrouching = false;
+			RideHeight = MoveTraits.SprintHeight;
+			PlayerSpeed = MoveTraits.SprintSpeed;
+		}
+		else {
+			PlayerSpeed = MoveTraits.JogSpeed;
+		}
+	}
+}

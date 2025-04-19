@@ -28,7 +28,7 @@ public class Stick: NetworkBehaviour, ICanControlCamera
 	public override void Spawned()
 	{
 		PlayerObj = PlayerRegistry.GetPlayer(Object.InputAuthority);
-		PlayerObj.Controller = this;
+		// PlayerObj.Controller = this;
 		
 		if (Object.HasInputAuthority)
 		{
@@ -36,7 +36,7 @@ public class Stick: NetworkBehaviour, ICanControlCamera
 		}
 		else
 		{
-			Instantiate(ResourcesManager.Instance.worldNicknamePrefab, InterfaceManager.Instance.worldCanvas.transform).SetTarget(this);
+			// Instantiate(ResourcesManager.Instance.worldNicknamePrefab, InterfaceManager.Instance.worldCanvas.transform).SetTarget(this);
 		}
 	}
 
