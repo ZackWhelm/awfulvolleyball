@@ -5,7 +5,7 @@ using Cinemachine;
 public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 {
 	public PlayerObject PlayerObj { get; private set; }
-	public AvatarMoveTraits MoveTraits;
+	[Header("Dependencies")]
 	public Rigidbody rb;
 
 	[Networked]
@@ -28,6 +28,15 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
     public float GroundedBuffer = 0.1f;
 	public float PlayerSpeed = 1.2f;
 
+	[Header("Spped Traits")]
+	public float SprintSpeed;
+	public float JogSpeed;
+	public float CrouchSpeed;
+	public float GroundDrag;
+	public float JumpForce;
+	public float BaseHeight;
+	public float CrouchHeight;
+	public float SprintHeight;
 
 	void Update()
 	{
@@ -82,7 +91,7 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 	private void MovePlayer(Vector3 moveDirection)
     {
 		rb.AddForce(moveDirection.normalized * 2f, ForceMode.Force);
-		TryHoverPlayer();
+		// TryHoverPlayer();
 		LimitSpeed();
 	}
 
@@ -127,20 +136,20 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 
     private void InputAuthorityUpdate(PlayerInput input)
 	{
-		RideHeight = MoveTraits.BaseHeight;
+		RideHeight = BaseHeight;
 		IsCrouching = input.crouchInput;
 		IsSprinting = input.sprintInput;
 
 		if (IsCrouching) {
-			RideHeight = MoveTraits.CrouchHeight;
+			RideHeight = CrouchHeight;
 		}
 		if (IsSprinting) {
 			IsCrouching = false;
-			RideHeight = MoveTraits.SprintHeight;
-			PlayerSpeed = MoveTraits.SprintSpeed;
+			RideHeight = SprintHeight;
+			PlayerSpeed = SprintSpeed;
 		}
 		else {
-			PlayerSpeed = MoveTraits.JogSpeed;
+			PlayerSpeed = JogSpeed;
 		}
 	}
 }

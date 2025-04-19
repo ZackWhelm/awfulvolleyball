@@ -94,10 +94,9 @@ GameObject:
   - component: {fileID: 4529645544484441692}
   - component: {fileID: 925218551095575575}
   - component: {fileID: 8323981972632487943}
-  - component: {fileID: 5595842665477217853}
   - component: {fileID: 1930955196405264184}
   - component: {fileID: 361747746504459916}
-  - component: {fileID: 3669640661512235381}
+  - component: {fileID: 7227639892706255673}
   m_Layer: 8
   m_Name: Avatar
   m_TagString: Untagged
@@ -153,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eadcfdeb454fe840891affd8e69149c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveTraits: {fileID: 5595842665477217853}
   rb: {fileID: 1930955196405264184}
   IsJumping: 0
   IsCrouching: 0
@@ -161,28 +159,16 @@ MonoBehaviour:
   hoverableLayers:
     serializedVersion: 2
     m_Bits: 129
-  RideHeight: 0.65
+  RideHeight: 0.36
   RideSpringDamper: 10
   RideSpringStrength: 100
   GroundedBuffer: 0.1
   PlayerSpeed: 1.2
---- !u!114 &5595842665477217853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4529645544484441693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d995a7bd07c184da85aa7f435b29ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   SprintSpeed: 1
   JogSpeed: 1
   CrouchSpeed: 0
-  groundDrag: 3
-  jumpForce: 3.6
+  GroundDrag: 3
+  JumpForce: 3.6
   BaseHeight: 0.36
   CrouchHeight: 0.3
   SprintHeight: 0.32
@@ -211,7 +197,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &361747746504459916
 MonoBehaviour:
@@ -236,8 +222,8 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
---- !u!135 &3669640661512235381
-SphereCollider:
+--- !u!136 &7227639892706255673
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -254,9 +240,11 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Radius: 0.11
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.15, z: 0}
 --- !u!1 &7219677339263960415
 GameObject:
   m_ObjectHideFlags: 0
