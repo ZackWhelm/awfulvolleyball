@@ -149,7 +149,6 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 
 	private bool IsGrounded()
 	{
-		Debug.Log("checking grounded:");
 		RaycastHit hit;
 		Vector3 rayOrigin = rb.transform.position;
 		Vector3 rayDir = Vector3.down;
@@ -163,7 +162,7 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 					IsJumping = false;
 				}
 				return rayDidHit;
-			}
+			} 
 			return false;
 		}
 		return rayDidHit;
