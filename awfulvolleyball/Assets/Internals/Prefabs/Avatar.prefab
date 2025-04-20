@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3766085929882751575}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.09, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8323981972632487943}
   - component: {fileID: 1930955196405264184}
   - component: {fileID: 361747746504459916}
-  - component: {fileID: 7227639892706255673}
+  - component: {fileID: 215108120385049849}
   m_Layer: 8
   m_Name: Avatar
   m_TagString: Untagged
@@ -214,7 +214,7 @@ MonoBehaviour:
   _stateAuthorityChangeErrorCorrectionDelta: 0
   SyncScale: 0
   SyncParent: 1
-  _interpolationTarget: {fileID: 5554191314693953252}
+  _interpolationTarget: {fileID: 0}
   UsePreciseRotation: 0
   UseRenderSleepThresholds: 1
   RenderThresholds:
@@ -222,7 +222,7 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
---- !u!136 &7227639892706255673
+--- !u!136 &215108120385049849
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,10 +241,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.11
-  m_Height: 0.5
+  m_Radius: 0.1
+  m_Height: 0.36
   m_Direction: 1
-  m_Center: {x: 0, y: -0.15, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7219677339263960415
 GameObject:
   m_ObjectHideFlags: 0

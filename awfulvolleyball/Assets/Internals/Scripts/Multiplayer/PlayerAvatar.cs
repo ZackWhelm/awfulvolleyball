@@ -91,7 +91,6 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 	private void MovePlayer(Vector3 moveDirection)
     {
 		rb.AddForce(moveDirection.normalized * 2f, ForceMode.Force);
-		// TryHoverPlayer();
 		LimitSpeed();
 	}
 
@@ -108,20 +107,15 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 		RaycastHit hit;
 		Vector3 rayOrigin = rb.transform.position;
 		Vector3 rayDir = Vector3.down;
-		float rayDistance = RideHeight + (GroundedBuffer*2);
+		float rayDistance = RideHeight + GroundedBuffer;
 
 		bool _rayDidHit = Physics.Raycast(rayOrigin, rayDir, out hit, rayDistance, hoverableLayers);
 				
 		if (_rayDidHit) {
-			Vector3 vel = rb.velocity;
-			Vector3 otherVel = Vector3.zero;
-			float rayDirVel = Vector3.Dot(rayDir, vel);
-			float otherDirVel = Vector3.Dot(rayDir, otherVel);
-			float relVel = rayDirVel - otherDirVel;
-			float x = hit.distance - RideHeight;
-			float springForce = (x* RideSpringStrength) - (relVel * RideSpringDamper);
-			rb.AddForce(rayDir * springForce);
-
+			Vector3 velocity = rb.velocity;
+			velocity.y = 0f;
+			rb.velocity = velocity;
+			rb.transform.position = new Vector3(transform.position.x, RideHeight, transform.position.z);
 		}
 	}
 
@@ -151,5 +145,27 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 		else {
 			PlayerSpeed = JogSpeed;
 		}
+	}
+
+	private bool IsGrounded()
+	{
+		Debug.Log("checking grounded:");
+		RaycastHit hit;
+		Vector3 rayOrigin = rb.transform.position;
+		Vector3 rayDir = Vector3.down;
+		float rayDistance = RideHeight + GroundedBuffer;
+		bool rayDidHit = Physics.Raycast(rayOrigin, rayDir, out hit, rayDistance, hoverableLayers);
+		Debug.Log("is grounded:" + rayDidHit);
+
+		if (IsJumping) {
+			if (rb.velocity.y < 0.0f ) {
+				if (rayDidHit) {
+					IsJumping = false;
+				}
+				return rayDidHit;
+			}
+			return false;
+		}
+		return rayDidHit;
 	}
 }
