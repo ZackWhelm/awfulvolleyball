@@ -75,12 +75,6 @@ public class Stick: NetworkBehaviour, ICanControlCamera
 		bodyRigidBody.angularVelocity = Vector3.zero;
 		bodyRigidBody.gameObject.transform.position = pos;
 	}
-	
-	public void HandleCritalHit() {
-		// TODO(zack: add anim)
-		OnDeath();
-	}
-
 
 	void OnDeath() {
 		ProgressionManager.Instance.ResetPlayer(this);
