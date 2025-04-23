@@ -7,6 +7,8 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 	public PlayerObject PlayerObj { get; private set; }
 	[Header("Dependencies")]
 	public Rigidbody rb;
+	public CapsuleCollider capsule;
+	public Transform sphereTransform;
 
 	[Networked]
 	public TickTimer JumpTimer { get; set; }
@@ -22,9 +24,6 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 
 	[Header("Hover Variables")]
 	public LayerMask hoverableLayers;
-	public float RideHeight = 1.2f;
-	public float RideSpringDamper = 1.0f;
-	public float RideSpringStrength = 1.0f;
     public float GroundedBuffer = 0.1f;
 	public float PlayerSpeed = 1.2f;
 
@@ -34,9 +33,21 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 	public float CrouchSpeed;
 	public float GroundDrag;
 	public float JumpForce;
+	public float JumpTimerStartTime = 0.25f;
 	public float BaseHeight;
 	public float CrouchHeight;
 	public float SprintHeight;
+
+
+	private float _avatarHeight;
+	public float AvatarHeight
+	{
+		get { return _avatarHeight; }
+		set { 
+			_avatarHeight = value; 
+			SetHeight();
+		}
+	}
 
 	void Update()
 	{
@@ -85,12 +96,24 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 		Vector3 newForward = new Vector3(input.forwardDir.x, 0.0f, input.forwardDir.y);
 		Vector3 newRight = new Vector3(input.rightDir.x, 0.0f, input.rightDir.y);
 		Vector3 moveDir = newForward * input.vertDir + newRight * input.horDir;
-		MovePlayer(moveDir);
+		HeightAndSpeedUpdates();
+		MovePlayer(moveDir, input.jumpInput);
 	}
 
-	private void MovePlayer(Vector3 moveDirection)
+	private void MovePlayer(Vector3 moveDirection, bool hasJumpInput)
     {
 		rb.AddForce(moveDirection.normalized * 2f, ForceMode.Force);
+		if (hasJumpInput) {
+			if (CanJump && IsGrounded()) {
+				Debug.Log("Tried Jump and succeeded");
+				rb.AddForce(Vector3.up * JumpForce * 50f, ForceMode.Force);
+				JumpTimer = TickTimer.CreateFromSeconds(Runner, JumpTimerStartTime);
+			}
+			else {
+				Debug.Log("Tried Jump and failed");
+			}
+		}
+		
 		LimitSpeed();
 	}
 
@@ -100,22 +123,6 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 		{
 			look.LookAt = rb.transform;
 			look.Follow = rb.transform;
-		}
-	}
-
-	private void TryHoverPlayer() {
-		RaycastHit hit;
-		Vector3 rayOrigin = rb.transform.position;
-		Vector3 rayDir = Vector3.down;
-		float rayDistance = RideHeight + GroundedBuffer;
-
-		bool _rayDidHit = Physics.Raycast(rayOrigin, rayDir, out hit, rayDistance, hoverableLayers);
-				
-		if (_rayDidHit) {
-			Vector3 velocity = rb.velocity;
-			velocity.y = 0f;
-			rb.velocity = velocity;
-			rb.transform.position = new Vector3(transform.position.x, RideHeight, transform.position.z);
 		}
 	}
 
@@ -130,21 +137,10 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 
     private void InputAuthorityUpdate(PlayerInput input)
 	{
-		RideHeight = BaseHeight;
 		IsCrouching = input.crouchInput;
 		IsSprinting = input.sprintInput;
 
-		if (IsCrouching) {
-			RideHeight = CrouchHeight;
-		}
-		if (IsSprinting) {
-			IsCrouching = false;
-			RideHeight = SprintHeight;
-			PlayerSpeed = SprintSpeed;
-		}
-		else {
-			PlayerSpeed = JogSpeed;
-		}
+
 	}
 
 	private bool IsGrounded()
@@ -152,19 +148,38 @@ public class PlayerAvatar: NetworkBehaviour, ICanControlCamera
 		RaycastHit hit;
 		Vector3 rayOrigin = rb.transform.position;
 		Vector3 rayDir = Vector3.down;
-		float rayDistance = RideHeight + GroundedBuffer;
+		float rayDistance = AvatarHeight + GroundedBuffer;
 		bool rayDidHit = Physics.Raycast(rayOrigin, rayDir, out hit, rayDistance, hoverableLayers);
-		Debug.Log("is grounded:" + rayDidHit);
-
-		if (IsJumping) {
-			if (rb.velocity.y < 0.0f ) {
-				if (rayDidHit) {
-					IsJumping = false;
-				}
-				return rayDidHit;
-			} 
-			return false;
-		}
+		Debug.Log("Grounded" + rayDidHit);
 		return rayDidHit;
+	}
+
+	private void HeightAndSpeedUpdates() {
+		if (IsCrouching) {
+			AvatarHeight = CrouchHeight;
+			if (!IsSprinting) {
+				return;
+			}
+		}
+		if (IsSprinting) {
+			AvatarHeight = SprintHeight;
+			PlayerSpeed = SprintSpeed;
+			return;
+		}
+		else {
+			PlayerSpeed = JogSpeed;
+		}
+	}
+
+	private void SetHeight()
+	{
+		capsule.height = AvatarHeight;
+		if (sphereTransform == null) {
+			return;
+		}
+		
+		float capsuleHeightWithoutRounds = capsule.height - (2*capsule.radius);
+		float circleHeight = capsuleHeightWithoutRounds / 2;
+		sphereTransform.localPosition = new Vector3(0.0f, circleHeight, 0.0f);
 	}
 }

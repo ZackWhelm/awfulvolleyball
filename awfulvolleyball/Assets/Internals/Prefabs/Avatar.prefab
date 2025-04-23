@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 3766085929882751575}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.09, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.08, z: 0}
+  m_LocalScale: {x: 0.19, y: 0.19, z: 0.19}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5554191314693953252}
@@ -153,15 +153,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1930955196405264184}
+  capsule: {fileID: 215108120385049849}
+  sphereTransform: {fileID: 7746400117829301008}
   IsJumping: 0
   IsCrouching: 0
   IsSprinting: 0
   hoverableLayers:
     serializedVersion: 2
     m_Bits: 129
-  RideHeight: 0.36
-  RideSpringDamper: 10
-  RideSpringStrength: 100
   GroundedBuffer: 0.1
   PlayerSpeed: 1.2
   SprintSpeed: 1
@@ -169,9 +168,10 @@ MonoBehaviour:
   CrouchSpeed: 0
   GroundDrag: 3
   JumpForce: 3.6
-  BaseHeight: 0.36
-  CrouchHeight: 0.3
-  SprintHeight: 0.32
+  JumpTimerStartTime: 0.25
+  BaseHeight: 0.5
+  CrouchHeight: 0.4
+  SprintHeight: 0.45
 --- !u!54 &1930955196405264184
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4529645544484441693}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7eb1b03211c3024489a88d4c809c36d7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
